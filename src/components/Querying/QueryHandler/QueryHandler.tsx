@@ -1,15 +1,28 @@
 import React, { useState } from 'react';
-import './QueryInput.module.css';
-import getLyricsService from "../../../api/services/GetLyricsService.ts";
+import axios from 'axios';
+import './QueryHandler.module.css';
 
-const QueryInput: React.FC = () => {
+const QueryHandler: React.FC = () => {
     const [trackName, setTrackName] = useState<string>('');
     const [artistName, setArtistName] = useState<string>('');
     const [response, setResponse] = useState<string>('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setResponse(await getLyricsService.getLyricsByTitleAndArtist(trackName, artistName));
+
+        try {
+            const params ={
+                artist_name: artistName,
+                track_name: trackName,
+                album_name: null,
+                duration: null
+            }
+            const result = await axios.get('https://lrclib.net/api/get', {params});
+            setResponse(JSON.stringify(result.data, null, 2));
+        } catch (error) {
+            console.error('Error submitting query:', error);
+            setResponse('An error occurred while submitting the query.');
+        }
     };
 
     return (
@@ -42,4 +55,4 @@ const QueryInput: React.FC = () => {
     );
 };
 
-export default QueryInput;
+export default QueryHandler;

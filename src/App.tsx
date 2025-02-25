@@ -7,6 +7,7 @@ function App() {
     <>
       <div>
           <h1>OnGakkou</h1>
+          <h2>音学校</h2>
           <QueryInput/>
       </div>
     </>
