@@ -1,5 +1,5 @@
 import './App.css'
-import QueryInput from "./components/Querying/QueryInput/QueryInput.tsx";
+import QueryContainer from "./components/Querying/QueryContainer/QueryContainer.tsx";
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
       <div>
           <h1>OnGakkou</h1>
           <h2>音学校</h2>
-          <QueryInput/>
+          <QueryContainer/>
       </div>
     </>
   )

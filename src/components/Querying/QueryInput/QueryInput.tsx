@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './QueryInput.module.css';
-import getLyricsService from "../../../api/services/GetLyricsService.ts";
+import {useQueryData} from "../../../hooks/useQueryData.ts";
 
 const QueryInput: React.FC = () => {
     const [trackName, setTrackName] = useState<string>('');
     const [artistName, setArtistName] = useState<string>('');
-    const [response, setResponse] = useState<string>('');
+    const {fetchData} = useQueryData()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setResponse(await getLyricsService.getLyricsByTitleAndArtist(trackName, artistName));
+        fetchData(trackName, artistName);
     };
 
     return (
@@ -31,13 +31,6 @@ const QueryInput: React.FC = () => {
                 />
                 <button type="submit">Submit</button>
             </form>
-
-            {response && (
-                <div>
-                    <h3>Response:</h3>
-                    <p>{response}</p>
-                </div>
-            )}
         </div>
     );
 };

@@ -12,7 +12,7 @@ class GetLyricsService {
             }
 
             const response = await LRCApiClient.get('get', {params});
-            return JSON.stringify(response.data, null, 2);
+            return response.data;
         } catch (error) {
             console.error(`Error fetching song with title ${title} and artist ${artist}:`, error);
             throw error;
