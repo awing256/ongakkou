@@ -4,11 +4,11 @@ import {useEffect, useState} from "react";
 import {splitLyrics} from "../../../utils/lyricSplitter.ts";
 
 const QueryDisplay: React.FC = () => {
-    const data = useQueryData();
+    const {data} = useQueryData();
     const [lyrics, setLyrics] = useState<string[]>([])
 
     useEffect(()=>{
-        setLyrics(splitLyrics(data.data.plainLyrics));
+        setLyrics(data ? splitLyrics(data.plainLyrics): []);
     },[data])
     return (
         <div>
