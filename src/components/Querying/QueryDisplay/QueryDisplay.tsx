@@ -2,6 +2,7 @@ import './QueryDisplay.module.css';
 import {useQueryData} from "../../../hooks/useQueryData.ts";
 import {useEffect, useState} from "react";
 import {splitLyrics} from "../../../utils/lyricSplitter.ts";
+import {FuriganaText} from "./LyricLine.tsx";
 
 const QueryDisplay: React.FC = () => {
     const {data} = useQueryData();
@@ -12,11 +13,11 @@ const QueryDisplay: React.FC = () => {
     },[data])
     return (
         <div>
-            {lyrics.map((line,index)=> (
+            {lyrics ? lyrics.map((line,index)=> (
                 <div key={index} className={"lyrics-line-" + line}>
-                    {line}
+                    <FuriganaText text={line}/>
                 </div>
-            ))}
+            )) : null}
         </div>
     );
 };
